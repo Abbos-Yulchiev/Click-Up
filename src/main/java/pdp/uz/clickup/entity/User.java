@@ -8,6 +8,7 @@ import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Data
@@ -34,7 +35,8 @@ public class User extends AbsEntity {
     private String initialLatter;
 
     @Column(nullable = false)
-    private Integer avatarId;
+    @OneToOne
+    private Attachment avatarId;
 
 
     private boolean enabled;
