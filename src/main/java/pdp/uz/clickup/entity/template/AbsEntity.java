@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @MappedSuperclass
 @Data
-public class AbsEntity {
+public abstract class AbsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

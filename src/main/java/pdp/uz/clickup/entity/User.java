@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +20,7 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "users")
 @Entity
-public class User extends AbsEntity {
+public class User extends AbsEntity implements UserDetails {
 
     @Column(nullable = false)
     private String fullName;
@@ -53,5 +56,10 @@ public class User extends AbsEntity {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 }
