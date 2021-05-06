@@ -17,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Space extends AbsEntity {
 
+    @Column(nullable = false)
     private String name;
 
     private String color;
@@ -26,22 +27,12 @@ public class Space extends AbsEntity {
 
     private String initialLetter;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Attachment attachment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User ownerId;
 
-    @ManyToMany
-    private List<User> user;
-
-    @ManyToMany
-    private List<View> view;
-
-    @ManyToOne
-    private ClickApps clickApps;
-
     @Enumerated(value = EnumType.STRING)
-    @ElementCollection
-    private List<AccessType> accessType;
+    private AccessType accessType;
 }

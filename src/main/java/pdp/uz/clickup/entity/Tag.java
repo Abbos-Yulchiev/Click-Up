@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,9 +21,6 @@ public class Tag extends AbsEntity {
 
     private String color;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private WorkSpace workSpace;
-
-    @ManyToMany
-    private List<Task> task;
 }

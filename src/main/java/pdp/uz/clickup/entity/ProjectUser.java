@@ -24,6 +24,4 @@ public class ProjectUser extends AbsEntity {
 
     @Enumerated(EnumType.STRING)
     private TaskPermission taskPermission;
-
-
 }

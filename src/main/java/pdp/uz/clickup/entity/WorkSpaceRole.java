@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import pdp.uz.clickup.entity.enums.WorkSpaceRoleName;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -16,11 +16,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class WorkSpaceRole extends AbsEntity {
 
+    @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    private WorkSpace workSpaceId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private WorkSpace workSpace;
 
-    @ManyToOne
-    private WorkSpaceRole extendsRoleWorkSpace;
+    @Enumerated(EnumType.STRING)
+    private WorkSpaceRoleName extendsWorkSpaceRoleName;
 }

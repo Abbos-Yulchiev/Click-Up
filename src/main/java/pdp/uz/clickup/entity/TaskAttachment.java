@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -17,7 +18,7 @@ import javax.persistence.OneToOne;
 @EqualsAndHashCode(callSuper = true)
 public class TaskAttachment extends AbsEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Task task;
 
     @OneToOne

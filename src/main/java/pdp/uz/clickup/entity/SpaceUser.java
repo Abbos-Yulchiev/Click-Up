@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -15,11 +14,11 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(callSuper = true)
-public class View extends AbsEntity {
-
-    @Column(nullable = false)
-    private String name;
+public class SpaceUser extends AbsEntity {
 
     @ManyToOne
-    private Icon icon;
+    private Space space;
+
+    @ManyToOne
+    private User member;
 }

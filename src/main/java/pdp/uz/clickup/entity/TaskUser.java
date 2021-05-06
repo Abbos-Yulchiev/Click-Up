@@ -6,28 +6,20 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Entity
-public class WorkSpace extends AbsEntity {
+@EqualsAndHashCode(callSuper = true)
+public class TaskUser extends AbsEntity {
 
-    private String name;
-
-    private String color;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Task task;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
-    @Column(nullable = false)
-    private String initialLetter;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Attachment avatarId;
 }

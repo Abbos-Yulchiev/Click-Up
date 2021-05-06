@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.enums.TaskPermission;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -21,10 +18,10 @@ public class CategoryUser extends AbsEntity {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Enumerated(EnumType.STRING)

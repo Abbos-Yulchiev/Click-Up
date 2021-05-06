@@ -29,6 +29,4 @@ public class Projects extends AbsEntity {
 
     private String color;
 
-    @ManyToMany
-    private List<User> user;
 }

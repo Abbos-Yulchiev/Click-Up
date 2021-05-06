@@ -6,10 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Data
@@ -27,21 +24,27 @@ public class Task extends AbsEntity {
     @OneToOne
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Priority priority;
 
     @ManyToOne
     private Task parentTaskId;
 
+    @Column(nullable = false)
     private Timestamp startedDate;
 
+    @Column(nullable = false)
     private Timestamp startTimeHas;
 
+    @Column(nullable = false)
     private Timestamp dueDate;
 
+    @Column(nullable = false)
     private Timestamp dueTimeHas;
 
+    @Column(nullable = false)
     private Long estimateTime;
 
+    @Column(nullable = false)
     private Timestamp achievedDate;
 }

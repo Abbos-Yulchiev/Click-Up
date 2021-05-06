@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Data
@@ -19,6 +20,6 @@ public class CheckList extends AbsEntity {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Task task;
 }
