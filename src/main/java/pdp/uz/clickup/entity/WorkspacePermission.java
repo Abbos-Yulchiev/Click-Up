@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pdp.uz.clickup.entity.enums.AccessType;
+import pdp.uz.clickup.entity.enums.WorkspacePermissionName;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Entity;
@@ -17,11 +17,11 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(callSuper = true)
-public class WorkSpacePermission extends AbsEntity {
+public class WorkspacePermission extends AbsEntity {
 
     @ManyToOne
-    private WorkSpaceRole workSpaceRole;
+    private WorkspaceRole workSpaceRole;
 
-    @Enumerated(value = EnumType.STRING)
-    private AccessType accessType;
+    @Enumerated(EnumType.STRING)
+    private WorkspacePermissionName workspacePermission;
 }

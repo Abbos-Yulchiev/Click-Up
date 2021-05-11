@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pdp.uz.clickup.security.JwtFilter;
 import pdp.uz.clickup.service.AuthService;
 
 import java.util.Properties;
@@ -23,9 +25,11 @@ import java.util.Properties;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     final AuthService authService;
+    final JwtFilter jwtFilter;
 
-    public SecurityConfig(@Lazy AuthService authService) {
+    public SecurityConfig(@Lazy AuthService authService, JwtFilter jwtFilter) {
         this.authService = authService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Bean
@@ -52,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated();
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

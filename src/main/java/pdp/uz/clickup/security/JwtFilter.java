@@ -1,5 +1,6 @@
 package pdp.uz.clickup.security;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +20,7 @@ public class JwtFilter extends OncePerRequestFilter {
     final JwtProvider jwtProvider;
     final AuthService authService;
 
-    public JwtFilter(JwtProvider jwtProvider, AuthService authService) {
+    public JwtFilter(JwtProvider jwtProvider, @Lazy AuthService authService) {
         this.jwtProvider = jwtProvider;
         this.authService = authService;
     }
@@ -31,7 +32,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String authorization = httpServletRequest.getHeader("Authorization");
         if (authorization != null && authorization.startsWith("Bearer")) {
             String email = jwtProvider.getEmailFromToken(authorization.substring(7));
-            if (email!=null){
+            if (email != null) {
                 UserDetails userDetails = authService.loadUserByUsername(email);
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

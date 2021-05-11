@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pdp.uz.clickup.entity.enums.WorkSpaceRoleName;
+import pdp.uz.clickup.entity.enums.WorkspaceRoleName;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-public class WorkSpaceRole extends AbsEntity {
+public class WorkspaceRole extends AbsEntity {
 
     @Column(nullable = false)
     private String name;
@@ -23,5 +23,5 @@ public class WorkSpaceRole extends AbsEntity {
     private WorkSpace workSpace;
 
     @Enumerated(EnumType.STRING)
-    private WorkSpaceRoleName extendsWorkSpaceRoleName;
+    private WorkspaceRoleName extendsWorkspaceRoleName;
 }

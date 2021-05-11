@@ -3,9 +3,9 @@ package pdp.uz.clickup.entity.template;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import pdp.uz.clickup.entity.User;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -27,9 +27,11 @@ public abstract class AbsEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    @CreatedBy
-    private Long createdBy;
+    @JoinColumn(updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User createdBy;
 
-    @LastModifiedBy
-    private Long updatedBy;
+    @JoinColumn(updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User updatedBy;
 }

@@ -1,6 +1,6 @@
 package pdp.uz.clickup.entity.enums;
 
-public enum WorkSpaceRoleName {
+public enum WorkspaceRoleName {
 
     ROLE_OWNER,
     ROLE_ADMIN,

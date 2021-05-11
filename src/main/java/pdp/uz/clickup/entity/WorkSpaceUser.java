@@ -24,7 +24,7 @@ public class WorkSpaceUser extends AbsEntity {
     private User user;
 
     @ManyToOne
-    private WorkSpaceRole workSpaceRole;
+    private WorkspaceRole workSpaceRole;
 
     private Timestamp dateInvited;
 

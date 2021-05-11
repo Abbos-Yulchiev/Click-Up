@@ -36,7 +36,6 @@ public class AuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
-
     }
 
     public ApiResponse registerEmployee(RegisterDTO registerDTO) {
