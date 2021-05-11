@@ -19,11 +19,10 @@ public class Projects extends AbsEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "id")
-    private List<Space> space;
+    @ManyToOne
+    private Space space;
 
-    @Enumerated(EnumType.STRING)
-    private AccessType accessType;
+    private boolean accessType;
 
     private boolean achieved;
 

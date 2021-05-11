@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pdp.uz.clickup.entity.enums.AccessType;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,22 +15,26 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Space extends AbsEntity {
 
-    @Column(nullable = false)
     private String name;
 
     private String color;
 
+    private String initials;
+
+    @OneToOne
+    private Attachment avatar;
+
+    private boolean accessType;
+
     @ManyToOne
-    private WorkSpace workSpace;
+    private WorkSpace workspace;
 
-    private String initialLetter;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private User owner;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Attachment attachment;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User ownerId;
-
-    @Enumerated(value = EnumType.STRING)
-    private AccessType accessType;
+    @PrePersist
+    @PreUpdate
+    public void setInitials() {
+        this.initials = name.substring(0, 1);
+    }
 }
