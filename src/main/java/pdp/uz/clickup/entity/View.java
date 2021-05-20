@@ -8,7 +8,9 @@ import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +24,7 @@ public class View extends AbsEntity {
 
     @ManyToOne
     private Icon icon;
+
+    @ManyToMany
+    private List<Space> space;
 }

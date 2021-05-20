@@ -1,4 +1,4 @@
-package pdp.uz.clickup.controller;
+package pdp.uz.clickup.config.controller;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;

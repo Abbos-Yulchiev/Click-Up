@@ -1,4 +1,4 @@
-package pdp.uz.clickup.controller;
+package pdp.uz.clickup.config.controller;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -140,9 +140,9 @@ public class WorkspaceController {
      * @return
      */
     @GetMapping
-    public HttpEntity<?> getWorkspaceList() {
+    public HttpEntity<?> getWorkspaceList(@CurrentUser User user) {
 
-        List<WorkSpace> workSpaceList = workspaceService.getWorkspaceList();
+        List<WorkSpace> workSpaceList = workspaceService.getWorkspaceList(user);
         return ResponseEntity.ok(workSpaceList);
     }
 
@@ -159,10 +159,24 @@ public class WorkspaceController {
         return ResponseEntity.status(apiResponse.isSuccess() ? 402 : 409).body(apiResponse);
     }
 
+    /**
+     * Adding permission to Role
+     *
+     * @param roleId
+     * @param rolePermissionDTO
+     * @return
+     */
     @PostMapping(value = "/addPermissionToRole/{roleId}")
     public HttpEntity<?> addOrPermissionToRole(@Valid @PathVariable Long roleId, @RequestBody RolePermissionDTO rolePermissionDTO) {
 
         ApiResponse apiResponse = workspaceService.addPermissionToRole(roleId, rolePermissionDTO);
         return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
+    }
+
+    @GetMapping(value = "/member/{workSpaceId}")
+    public HttpEntity<?> getMemberAndGuest(@PathVariable Long workSpaceId) {
+
+        List<MemberDTO> memberDTOList = workspaceService.getMemberAndGuest(workSpaceId);
+        return ResponseEntity.ok(memberDTOList);
     }
 }

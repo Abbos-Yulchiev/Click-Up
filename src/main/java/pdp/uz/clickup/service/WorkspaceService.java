@@ -9,15 +9,6 @@ import java.util.List;
 public interface WorkspaceService {
 
 
-    /**TODO
-     * Workspace edit qilish,           +++
-     * ownerini o'zgartish,             +++
-     * member va mehmonlarini ko'rish,  +++
-     * Workspacelari ro'yxatini olish,  +++
-     * Workspace ga role qo'shish       +++
-     * va Workspace rolelarini permisison berish yoki olib tashlash +++
-     * kabi amallarni bajaruvchi method larni yozing.*/
-
     ApiResponse addWorkspace(WorkspaceDTO workspaceDTO, User user);
 
     ApiResponse addRole(WorkspaceRoleDTO workspaceRoleDTO);
@@ -32,7 +23,7 @@ public interface WorkspaceService {
 
     List<User> getWorkspaceGuestList(Long workspaceId);
 
-    List<WorkSpace> getWorkspaceList();
+    List<WorkSpace> getWorkspaceList(User user);
 
     ApiResponse editWorkspace(Long id, WorkspaceDTO workspaceDTO);
 
@@ -41,4 +32,6 @@ public interface WorkspaceService {
     ApiResponse joinToWorkspace(Long id, User user);
 
     ApiResponse changeOwnerWorkspace(Long id, Long ownerId);
+
+    List<MemberDTO> getMemberAndGuest(Long workSpaceId);
 }

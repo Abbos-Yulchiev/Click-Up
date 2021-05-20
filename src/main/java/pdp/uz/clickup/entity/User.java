@@ -11,6 +11,7 @@ import pdp.uz.clickup.entity.enums.SystemRoleName;
 import pdp.uz.clickup.entity.template.AbsEntity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -44,6 +45,8 @@ public class User extends AbsEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     private String emailCode;
+
+    private Timestamp lastActiveTime;
 
     @Enumerated(EnumType.STRING)
     private SystemRoleName systemRoleName;

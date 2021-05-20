@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class WorkspaceServiceImpl implements WorkspaceService {
@@ -227,8 +228,10 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     }
 
     @Override
-    public List<WorkSpace> getWorkspaceList() {
-        return workspaceRepository.findAll();
+    public List<WorkSpace> getWorkspaceList(User user) {
+
+        List<WorkSpaceUser> workSpaceUsers = workspaceUserRepository.findAllByUserId(user.getId());
+        return workSpaceUsers.stream().map(workSpaceUser -> mapWorkspaceToWorkSpace(workSpaceUser.getWorkSpace())).collect(Collectors.toList());
     }
 
     @Override
@@ -289,6 +292,46 @@ public class WorkspaceServiceImpl implements WorkspaceService {
         return new ApiResponse("Role Permission(s) edited!", true);
     }
 
+    @Override
+    public List<MemberDTO> getMemberAndGuest(Long workSpaceId) {
+        List<WorkSpaceUser> workSpaceUsers = workspaceUserRepository.findByWorkSpaceId(workSpaceId);
+
+        /**
+         * List<MemberDTO> memberDTOList = new ArrayList<>();
+         for (WorkSpaceUser workSpaceUser : workSpaceUsers) {
+         MemberDTO memberDTO = mapWorkSpaceUserToMemberDTO(workSpaceUser);
+         memberDTOList.add(memberDTO);
+         }
+         return memberDTOList;*/
+        return workSpaceUsers.stream().map(this::mapWorkSpaceUserToMemberDTO).collect(Collectors.toList());
+    }
+
+
+    /**
+     * My own method
+     */
+    public MemberDTO mapWorkSpaceUserToMemberDTO(WorkSpaceUser workSpaceUser) {
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(workSpaceUser.getUser().getId());
+        memberDTO.setFullName(memberDTO.getFullName());
+        memberDTO.setEmail(memberDTO.getEmail());
+        memberDTO.setRoleName(workSpaceUser.getWorkSpaceRole().getName());
+        memberDTO.setLastActiveTime(workSpaceUser.getUser().getLastActiveTime());
+        return memberDTO;
+    }
+
+    public WorkSpace mapWorkspaceToWorkSpace(WorkSpace workSpace) {
+
+        WorkSpace workSpaceNew = new WorkSpace();
+        workSpace.setId(workSpace.getId());
+        workSpace.setInitialLetter();
+        workSpace.setAvatarId(workSpace.getAvatarId() == null ? null : workSpace.getAvatarId());
+        workSpace.setColor(workSpace.getColor());
+        workSpace.setName(workSpace.getName());
+
+        return workSpace;
+    }
+
     public Boolean sendEmail(String sendingEmail, String emailCode) {
 
         try {
@@ -303,7 +346,6 @@ public class WorkspaceServiceImpl implements WorkspaceService {
             return false;
         }
     }
-
     /*@Override
     public ApiResponse addMember(AddMemberDTO addMemberDTO) {
 

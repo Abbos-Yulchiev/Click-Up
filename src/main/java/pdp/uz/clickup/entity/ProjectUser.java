@@ -22,6 +22,6 @@ public class ProjectUser extends AbsEntity {
     @ManyToOne
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    private TaskPermission taskPermission;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Task task;
 }

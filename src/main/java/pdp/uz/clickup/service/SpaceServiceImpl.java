@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SpaceImpl implements SpaceService{
+public class SpaceServiceImpl implements SpaceService{
 
     final AttachmentRepository attachmentRepository;
     final WorkspaceRepository workspaceRepository;
     final UserRepository userRepository;
     final SpaceRepository spaceRepository;
 
-    public SpaceImpl(AttachmentRepository attachmentRepository, WorkspaceRepository workspaceRepository, UserRepository userRepository, SpaceRepository spaceRepository) {
+    public SpaceServiceImpl(AttachmentRepository attachmentRepository, WorkspaceRepository workspaceRepository, UserRepository userRepository, SpaceRepository spaceRepository) {
         this.attachmentRepository = attachmentRepository;
         this.workspaceRepository = workspaceRepository;
         this.userRepository = userRepository;

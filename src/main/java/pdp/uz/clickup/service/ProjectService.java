@@ -1,6 +1,5 @@
 package pdp.uz.clickup.service;
 
-import org.springframework.stereotype.Service;
 import pdp.uz.clickup.entity.Projects;
 import pdp.uz.clickup.payload.ApiResponse;
 import pdp.uz.clickup.payload.ProjectDTO;
